@@ -1,0 +1,31 @@
+{
+  "name": "philo4all",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A calm nonprofit philosophy reader for public-domain classics.",
+  "scripts": {
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w apps/web && npm run build -w packages/content && npm run build -w packages/ui",
+    "lint": "npm run lint -w apps/web",
+    "test": "vitest run",
+    "typecheck": "tsc -b",
+    "content:validate": "tsx scripts/validate-content.ts",
+    "content:export-sql": "tsx scripts/export-seed-sql.ts",
+    "content:import-fulltext": "tsx scripts/import-fulltext.ts",
+    "content:fetch-mit-classics": "tsx scripts/fetch-mit-classics.ts"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "playwright": "^1.61.1",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

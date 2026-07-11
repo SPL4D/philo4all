@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Philo4All",
+    "slug": "philo4all",
+    "scheme": "philo4all",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F7F0E4"
+      }
+    }
+  }
+}
