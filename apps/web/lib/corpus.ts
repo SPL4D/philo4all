@@ -19,7 +19,9 @@ export type CatalogWork = Work & { authorName: string };
 
 // Resolve relative to this module so `next dev`, `next build`, and one-off
 // import scripts all locate the workspace corpus consistently.
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const root = process.env.VERCEL
+  ? process.cwd()
+  : resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const indexPath = resolve(root, "content-index/documents.json");
 
 function slugify(value: string) {
