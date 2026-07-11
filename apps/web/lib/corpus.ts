@@ -1,5 +1,5 @@
-import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Chapter, Tradition, Work } from "@philo4all/content";
 
@@ -19,9 +19,12 @@ export type CatalogWork = Work & { authorName: string };
 
 // Resolve relative to this module so `next dev`, `next build`, and one-off
 // import scripts all locate the workspace corpus consistently.
-const root = process.env.VERCEL
-  ? process.cwd()
-  : resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const sourceWorkspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+// During a Vercel build this resolves to the repository root. At runtime the
+// traced corpus is placed beside the server function, so fall back to cwd.
+const root = existsSync(join(sourceWorkspaceRoot, "content-index/documents.json"))
+  ? sourceWorkspaceRoot
+  : process.cwd();
 const indexPath = resolve(root, "content-index/documents.json");
 
 function slugify(value: string) {
